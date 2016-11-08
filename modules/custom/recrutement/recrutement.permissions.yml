@@ -1,0 +1,19 @@
+add recrutement entities:
+  title: 'Create new Recrutement entities'
+
+administer recrutement entities:
+  title: 'Administer Recrutement entities'
+  description: 'Allow to access the administration form to configure Recrutement entities.'
+  restrict access: true
+
+delete recrutement entities:
+  title: 'Delete Recrutement entities'
+
+edit recrutement entities:
+  title: 'Edit Recrutement entities'
+
+view published recrutement entities:
+  title: 'View published Recrutement entities'
+
+view unpublished recrutement entities:
+  title: 'View unpublished Recrutement entities'

@@ -1,0 +1,17 @@
+# Recrutement routing definition
+entity.recrutement.canonical:
+  route_name: entity.recrutement.canonical
+  base_route: entity.recrutement.canonical
+  title: 'View'
+
+entity.recrutement.edit_form:
+  route_name: entity.recrutement.edit_form
+  base_route: entity.recrutement.canonical
+  title: Edit
+
+entity.recrutement.delete_form:
+  route_name:  entity.recrutement.delete_form
+  base_route:  entity.recrutement.canonical
+  title: Delete
+  weight: 10
+
