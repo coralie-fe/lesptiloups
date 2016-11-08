@@ -1,0 +1,28 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.recrutement.field_affecter_a_une_section
+    - taxonomy.vocabulary.section
+  module:
+    - recrutement
+id: recrutement.recrutement.field_affecter_a_une_section
+field_name: field_affecter_a_une_section
+entity_type: recrutement
+bundle: recrutement
+label: 'Affecter à une section'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      section: section
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

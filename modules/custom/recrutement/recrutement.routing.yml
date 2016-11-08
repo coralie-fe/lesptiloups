@@ -1,0 +1,7 @@
+entity.recrutement.add_form:
+  path: '/recrutement/demande'
+  defaults:
+    _entity_form: recrutement.add
+    _title: 'Demande de recrutement'
+  requirements:
+    _entity_create_access: 'recrutement'

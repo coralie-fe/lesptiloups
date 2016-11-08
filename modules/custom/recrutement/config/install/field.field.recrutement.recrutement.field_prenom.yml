@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.recrutement.field_prenom
+  module:
+    - recrutement
+id: recrutement.recrutement.field_prenom
+field_name: field_prenom
+entity_type: recrutement
+bundle: recrutement
+label: Prénom
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

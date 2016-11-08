@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.recrutement.field_email
+  module:
+    - recrutement
+id: recrutement.recrutement.field_email
+field_name: field_email
+entity_type: recrutement
+bundle: recrutement
+label: Email
+description: ''
+required: true
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

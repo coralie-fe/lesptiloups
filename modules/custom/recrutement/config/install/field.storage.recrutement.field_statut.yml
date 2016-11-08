@@ -1,0 +1,29 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - options
+    - recrutement
+id: recrutement.field_statut
+field_name: field_statut
+entity_type: recrutement
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: '0'
+      label: 'En attente'
+    -
+      value: '1'
+      label: Confirmé
+    -
+      value: '2'
+      label: Archivé
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
