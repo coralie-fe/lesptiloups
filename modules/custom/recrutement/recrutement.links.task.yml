@@ -1,4 +1,8 @@
 # Recrutement routing definition
+recrutement.settings_tab:
+  route_name: recrutement.settings
+  title: 'Settings'
+  base_route: recrutement.settings
 entity.recrutement.canonical:
   route_name: entity.recrutement.canonical
   base_route: entity.recrutement.canonical

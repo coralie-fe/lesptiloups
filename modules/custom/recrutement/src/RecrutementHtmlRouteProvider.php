@@ -29,9 +29,6 @@ class RecrutementHtmlRouteProvider extends AdminHtmlRouteProvider {
       $collection->add("entity.{$entity_type_id}.add_form", $add_form_route);
     }
 
-    $add_page_route = $this->getAddPageRoute($entity_type);
-    $collection->add("$entity_type_id.add_page", $add_page_route);
-
     if ($settings_form_route = $this->getSettingsFormRoute($entity_type)) {
       $collection->add("$entity_type_id.settings", $settings_form_route);
     }
@@ -81,15 +78,17 @@ class RecrutementHtmlRouteProvider extends AdminHtmlRouteProvider {
       ];
 
       $route = new Route($entity_type->getLinkTemplate('add-form'));
-      $bundle_entity_type_id = $entity_type->getBundleEntityType();
-      // Content entities with bundles are added via a dedicated controller.
+      // Use the add form handler, if available, otherwise default.
+      $operation = 'default';
+      if ($entity_type->getFormClass('add')) {
+        $operation = 'add';
+      }
       $route
         ->setDefaults([
-          '_controller' => 'Drupal\recrutement\Controller\RecrutementAddController::addForm',
-          '_title_callback' => 'Drupal\recrutement\Controller\RecrutementAddController::getAddFormTitle',
+          '_entity_form' => "{$entity_type_id}.{$operation}",
+          '_title' => "Add {$entity_type->getLabel()}",
         ])
-        ->setRequirement('_entity_create_access', $entity_type_id . ':{' . $bundle_entity_type_id . '}');
-      $parameters[$bundle_entity_type_id] = ['type' => 'entity:' . $bundle_entity_type_id];
+        ->setRequirement('_entity_create_access', $entity_type_id);
 
       $route
         ->setOption('parameters', $parameters)
@@ -97,28 +96,6 @@ class RecrutementHtmlRouteProvider extends AdminHtmlRouteProvider {
 
       return $route;
     }
-  }
-
-  /**
-   * Gets the add page route.
-   *
-   * @param \Drupal\Core\Entity\EntityTypeInterface $entity_type
-   *   The entity type.
-   *
-   * @return \Symfony\Component\Routing\Route|null
-   *   The generated route, if available.
-   */
-  protected function getAddPageRoute(EntityTypeInterface $entity_type) {
-    $route = new Route("/admin/structure/{$entity_type->id()}/add");
-    $route
-      ->setDefaults([
-        '_controller' => 'Drupal\recrutement\Controller\RecrutementAddController::add',
-        '_title' => "Add {$entity_type->getLabel()}",
-      ])
-      ->setRequirement('_entity_create_access', $entity_type->id())
-      ->setOption('_admin_route', TRUE);
-
-    return $route;
   }
 
   /**

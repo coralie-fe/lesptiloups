@@ -18,7 +18,6 @@ use Drupal\user\UserInterface;
  * @ContentEntityType(
  *   id = "recrutement",
  *   label = @Translation("Recrutement"),
- *   bundle_label = @Translation("Recrutement type"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\recrutement\RecrutementListBuilder",
@@ -39,7 +38,6 @@ use Drupal\user\UserInterface;
  *   admin_permission = "administer recrutement entities",
  *   entity_keys = {
  *     "id" = "id",
- *     "bundle" = "type",
  *     "label" = "name",
  *     "uuid" = "uuid",
  *     "uid" = "user_id",
@@ -48,13 +46,12 @@ use Drupal\user\UserInterface;
  *   },
  *   links = {
  *     "canonical" = "/admin/structure/recrutement/{recrutement}",
- *     "add-form" = "/admin/structure/recrutement/add/{recrutement_type}",
+ *     "add-form" = "/admin/structure/recrutement/add",
  *     "edit-form" = "/admin/structure/recrutement/{recrutement}/edit",
  *     "delete-form" = "/admin/structure/recrutement/{recrutement}/delete",
  *     "collection" = "/admin/structure/recrutement",
  *   },
- *   bundle_entity_type = "recrutement_type",
- *   field_ui_base_route = "entity.recrutement_type.edit_form"
+ *   field_ui_base_route = "recrutement.settings"
  * )
  */
 class Recrutement extends ContentEntityBase implements RecrutementInterface {
@@ -67,13 +64,6 @@ class Recrutement extends ContentEntityBase implements RecrutementInterface {
     $values += array(
       'user_id' => \Drupal::currentUser()->id(),
     );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getType() {
-    return $this->bundle();
   }
 
   /**
@@ -159,11 +149,6 @@ class Recrutement extends ContentEntityBase implements RecrutementInterface {
       ->setLabel(t('ID'))
       ->setDescription(t('The ID of the Recrutement entity.'))
       ->setReadOnly(TRUE);
-    $fields['type'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Type'))
-      ->setDescription(t('The Recrutement type/bundle.'))
-      ->setSetting('target_type', 'recrutement_type')
-      ->setRequired(TRUE);
     $fields['uuid'] = BaseFieldDefinition::create('uuid')
       ->setLabel(t('UUID'))
       ->setDescription(t('The UUID of the Recrutement entity.'))

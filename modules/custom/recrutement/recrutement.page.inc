@@ -30,33 +30,3 @@ function template_preprocess_recrutement(array &$variables) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
 }
-
-/**
-* Prepares variables for a custom entity type creation list templates.
-*
-* Default template: recrutement-content-add-list.html.twig.
-*
-* @param array $variables
-*   An associative array containing:
-*   - content: An array of recrutement-types.
-*
-* @see block_content_add_page()
-*/
-function template_preprocess_recrutement_content_add_list(&$variables) {
-  $variables['types'] = array();
-  $query = \Drupal::request()->query->all();
-  foreach ($variables['content'] as $type) {
-    $variables['types'][$type->id()] = array(
-      'link' => Link::fromTextAndUrl($type->label(), new Url('entity.recrutement.add_form', array(
-        'recrutement_type' => $type->id()
-      ), array('query' => $query))),
-      'description' => array(
-      '#markup' => $type->label(),
-      ),
-      'title' => $type->label(),
-      'localized_options' => array(
-      'query' => $query,
-      ),
-    );
-  }
-}

@@ -6,11 +6,8 @@ entity.recrutement.collection:
   parent: system.admin_structure
   weight: 100
 
-# Recrutement type menu items definition
-entity.recrutement_type.collection:
-  title: 'Recrutement type'
-  route_name: entity.recrutement_type.collection
-  description: 'List Recrutement type (bundles)'
+recrutement.admin.structure.settings:
+  title: Recrutement settings
+  description: 'Configure Recrutement entities'
+  route_name: recrutement.settings
   parent: system.admin_structure
-  weight: 99
-

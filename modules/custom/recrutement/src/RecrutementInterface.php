@@ -14,14 +14,6 @@ use Drupal\user\EntityOwnerInterface;
 interface RecrutementInterface extends ContentEntityInterface, EntityChangedInterface, EntityOwnerInterface {
   // Add get/set methods for your configuration properties here.
   /**
-   * Gets the Recrutement type.
-   *
-   * @return string
-   *   The Recrutement type.
-   */
-  public function getType();
-
-  /**
    * Gets the Recrutement name.
    *
    * @return string
