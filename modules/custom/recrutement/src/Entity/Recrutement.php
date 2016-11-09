@@ -25,6 +25,7 @@ use Drupal\user\UserInterface;
  *
  *     "form" = {
  *       "default" = "Drupal\recrutement\Form\RecrutementForm",
+ *       "test" = "Drupal\recrutement\Form\RecrutementForm",
  *       "add" = "Drupal\recrutement\Form\RecrutementForm",
  *       "edit" = "Drupal\recrutement\Form\RecrutementForm",
  *       "delete" = "Drupal\recrutement\Form\RecrutementDeleteForm",
@@ -48,7 +49,6 @@ use Drupal\user\UserInterface;
  *     "canonical" = "/admin/structure/recrutement/{recrutement}",
  *     "add-form" = "/admin/structure/recrutement/add",
  *     "edit-form" = "/admin/structure/recrutement/{recrutement}/edit",
- *     "delete-form" = "/admin/structure/recrutement/{recrutement}/delete",
  *     "collection" = "/admin/structure/recrutement",
  *   },
  *   field_ui_base_route = "recrutement.settings"

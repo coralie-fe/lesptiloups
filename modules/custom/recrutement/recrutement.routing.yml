@@ -5,3 +5,11 @@ entity.recrutement.add_form:
     _title: 'Demande de recrutement'
   requirements:
     _entity_create_access: 'recrutement'
+
+entity.hello:
+  path: '/hello'
+  defaults:
+    _title: 'Hello'
+    _controller: '\Drupal\recrutement\Controller\HelloController:content'
+  requirements:
+    _access: 'TRUE'
