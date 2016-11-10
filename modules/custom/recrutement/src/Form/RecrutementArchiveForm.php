@@ -16,12 +16,12 @@ use Drupal\Core\Url;
  *
  * @ingroup content_entity_example
  */
-class RecrutementConfirmForm extends ContentEntityConfirmFormBase {
+class RecrutementArchiveForm extends ContentEntityConfirmFormBase {
     /**
      * {@inheritdoc}
      */
     public function getQuestion() {
-        return $this->t('Are you sure you want to confirm entity %name?', array('%name' => $this->entity->label()));
+        return $this->t('Are you sure you want to archive entity %name?', array('%name' => $this->entity->label()));
     }
 
     /**
@@ -37,7 +37,7 @@ class RecrutementConfirmForm extends ContentEntityConfirmFormBase {
      * {@inheritdoc}
      */
     public function getConfirmText() {
-        return $this->t('Confirm');
+        return $this->t('Archive');
     }
 
 
@@ -49,7 +49,7 @@ class RecrutementConfirmForm extends ContentEntityConfirmFormBase {
         $form['recrutement_render'] = array(
             '#markup' => \Drupal::service('renderer')->render($render_array_entity)
         );
-        $this->entity->changeRecrutementStatus();
+
         return parent::buildForm($form, $form_state);
     }
 
@@ -62,11 +62,11 @@ class RecrutementConfirmForm extends ContentEntityConfirmFormBase {
         $entity = $this->getEntity();
         //$entity->delete();
 
-       /* \Drupal::logger('content_entity_example')->notice('@type: deleted %title.',
-            array(
-                '@type' => $this->entity->bundle(),
-                '%title' => $this->entity->label(),
-            ));*/
+        /* \Drupal::logger('content_entity_example')->notice('@type: deleted %title.',
+             array(
+                 '@type' => $this->entity->bundle(),
+                 '%title' => $this->entity->label(),
+             ));*/
         //$form_state->setRedirect('entity.recrutement.collection');
     }
 

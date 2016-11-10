@@ -38,7 +38,7 @@ use Drupal\Core\Mail\MailManagerInterface;
  *       "parent" = "Drupal\recrutement\Form\RecrutementForm",
  *       "equipe_pedagogique" = "Drupal\recrutement\Form\RecrutementForm",
  *       "confirm" = "Drupal\recrutement\Form\RecrutementConfirmForm",
- *       "archive" = "Drupal\recrutement\Form\RecrutementConfirmForm",
+ *       "archive" = "Drupal\recrutement\Form\RecrutementArchiveForm",
 
  *     },
  *     "access" = "Drupal\recrutement\RecrutementAccessControlHandler",
@@ -307,6 +307,18 @@ kint($name);
         $message = t('Une nouvelle notification a été envoyé à @email ', array('@email' => $to));
         drupal_set_message($message, 'status');
         \Drupal::logger('mail-log')->notice($message);
+    }
+
+    public function changeRecrutementStatus() {
+        $a  = $this->get('status');
+        $b = $a->getValue();
+         $a->setValue(2);
+        $c = $a->getValue();
+        $this->set('status', 2);
+        $a  = $this->get('status');
+        $b = $a->getValue();
+        $this->get('status')->setValue(2);
+        $this->save();
     }
 
 }
