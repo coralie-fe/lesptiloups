@@ -14,9 +14,31 @@ use Drupal\Core\Url;
  */
 class RecrutementListBuilder extends EntityListBuilder {
   use LinkGeneratorTrait;
-  /**
-   * {@inheritdoc}
-   */
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultOperations(EntityInterface $entity) {
+        $operations = parent::getDefaultOperations($entity);
+
+        if ($entity->hasLinkTemplate('confirm-form')) {
+            $operations['confirm'] = array(
+                'title' => t('Confirm'),
+                'weight' => -20,
+                'url' => $entity->toUrl('confirm-form'),
+            );
+        }
+        if ($entity->hasLinkTemplate('archive-form')) {
+            $operations['archive'] = array(
+                'title' => t('Archive'),
+                'weight' => 21,
+                'url' => $entity->toUrl('archive-form'),
+            );
+        }
+        return $operations;
+    }
+
   public function buildHeader() {
     $header['id'] = $this->t('Recrutement ID');
     $header['name'] = $this->t('Name');

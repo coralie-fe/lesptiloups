@@ -2,13 +2,17 @@
 
 namespace Drupal\recrutement\Entity;
 
+use Drupal\Core\Cache\CacheableDependencyInterface;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Render\AttachmentsInterface;
+use Drupal\Core\Render\BubbleableMetadata;
 use Drupal\recrutement\RecrutementInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Mail\MailManagerInterface;
 
 /**
  * Defines the Recrutement entity.
@@ -29,6 +33,13 @@ use Drupal\user\UserInterface;
  *       "add" = "Drupal\recrutement\Form\RecrutementForm",
  *       "edit" = "Drupal\recrutement\Form\RecrutementForm",
  *       "delete" = "Drupal\recrutement\Form\RecrutementDeleteForm",
+ *       "anonyme" = "Drupal\recrutement\Form\RecrutementForm",
+ *       "bureau" = "Drupal\recrutement\Form\RecrutementForm",
+ *       "parent" = "Drupal\recrutement\Form\RecrutementForm",
+ *       "equipe_pedagogique" = "Drupal\recrutement\Form\RecrutementForm",
+ *       "confirm" = "Drupal\recrutement\Form\RecrutementConfirmForm",
+ *       "archive" = "Drupal\recrutement\Form\RecrutementConfirmForm",
+
  *     },
  *     "access" = "Drupal\recrutement\RecrutementAccessControlHandler",
  *     "route_provider" = {
@@ -49,6 +60,9 @@ use Drupal\user\UserInterface;
  *     "canonical" = "/admin/structure/recrutement/{recrutement}",
  *     "add-form" = "/admin/structure/recrutement/add",
  *     "edit-form" = "/admin/structure/recrutement/{recrutement}/edit",
+ *     "delete-form" = "/admin/structure/recrutement/{recrutement}/delete",
+ *     "confirm-form" = "/admin/structure/recrutement/{recrutement}/confirm",
+ *     "archive-form" = "/admin/structure/recrutement/{recrutement}/archive",
  *     "collection" = "/admin/structure/recrutement",
  *   },
  *   field_ui_base_route = "recrutement.settings"
@@ -224,5 +238,75 @@ class Recrutement extends ContentEntityBase implements RecrutementInterface {
 
     return $fields;
   }
+
+    /**
+     * create user with status  blocked (0)
+     */
+    public function createUser($name,$email) {
+        $user_id= "";
+        $user = \Drupal\user\Entity\User::create();
+kint($name);
+        kint($email); die();
+//Mandatory settings
+        $user->setPassword('passworrrd'); // note : faire la generation pass aleatoire
+        $user->enforceIsNew();
+        $user->setEmail("iii@free.fr");
+        // note : voir plain texte pour name sur  validate du form
+        $user->setUsername("iii");//This username must be unique and accept only a-Z,0-9, - _ @ .
+        //$user->set('status',0);
+
+        //$user->addRole('parent');
+
+        //$user->set('status')->value = 0;
+        //$user->activate();
+
+
+//Optional settings
+        /*$user->set("init", 'email');
+        $user->set("langcode", $language);
+        $user->set("preferred_langcode", $language);
+        $user->set("preferred_admin_langcode", $language);
+        //$user->set("setting_name", 'setting_value');
+        $user->activate();*/
+
+//Save user
+        //$res = $user->save();
+        return $user_id;
+
+
+
+    }
+
+    //fonction d'envoi d'email
+
+    /**
+     * @return string
+     */
+    public function getSendMail()
+    {
+        //Recupération de l'uid utilisateur inscris
+        //$uid = $this->getOwner();
+        $mailManager = \Drupal::service('plugin.manager.mail');//Chargement du service plugin manager mail
+        $module = 'recrutement';//nom du module utilisé
+        $key = 'recrutement_mail';//La clé du mail
+        $to = \Drupal::currentUser()->getEmail();//Le destinataire du mail
+        $param['message'] = "Bonjour";//Message en dure
+        $param['title'] = "Bonsoir";//Titre en dure
+        $langcode = \Drupal::currentUser()->getPreferredLangcode();//Langue
+        $send = true;
+
+        $result = $mailManager->mail($module, $key, $to, $langcode, $param, NULL, $send);//préparation du mail
+        //Si le mail nest pas envoyé
+        if ($result != true)  {
+            $message = t('Nous avons un problème dans lenvoi du mail à @email.', array('@email' => $to));
+            drupal_set_message($message, 'error');
+            \Drupal::logger('mail-log')->error($message);
+            return;
+        }
+        //Sinon si le mail a bien été envoyé
+        $message = t('Une nouvelle notification a été envoyé à @email ', array('@email' => $to));
+        drupal_set_message($message, 'status');
+        \Drupal::logger('mail-log')->notice($message);
+    }
 
 }

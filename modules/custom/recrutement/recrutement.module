@@ -1,0 +1,43 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: POE 2
+ * Date: 09/11/2016
+ * Time: 12:42
+ */
+
+//hook de test affichant un message lorsque que le cron est lancé
+function recrutement_cron()
+{
+    return drupal_set_message("Le cron a été lance", "status");
+}
+
+
+//hook qui configure le mail d'envoi lorsque le formulaire
+function recrutement_mail($key, &$message, $param)
+{
+    $options = array(
+        'langcode' => $message['langcode'],//La langue du courriel
+    );
+
+    //Selon cas où la clé est renseigné, on formalise le courriel
+    switch ($key) {
+        case 'node_insert':
+            $message['from'] = \Drupal::config('system.site')->get('mail');//Le mail de l'expéditeur
+            $message['subject'] = t('Le sujet du mail ici: @title', array('@title' => $param['title']), $options);//L'objet du courriel
+            $message['body'][] = \Drupal\Component\Utility\Html::escape($param['message']);//Le corps du courriel
+            $message['path']=\Drupal::service('path.validator');//Le path pour valider le courriel
+            break;
+    }
+
+//fonction qui envoi le chemin valide dans le courriel
+function recrutement_validate_path($element, \Drupal\Core\Form\FormState $form_state)
+    {
+        $path = $element['#value'];
+        if (!empty($path)) {
+            if (!(\Drupal::service('path.validator')->isValid($path))) {
+                $form_state->setError($element, t('Veuillez indiquer un chemin de redirection valide.'));
+            }
+        }
+    }
+}

@@ -1,15 +1,41 @@
 entity.recrutement.add_form:
-  path: '/recrutement/demande'
+  path: '/inscription'
   defaults:
     _entity_form: recrutement.add
     _title: 'Demande de recrutement'
+   # _controller: '\Drupal\recrutement\Controller\RecrutementController::content'
   requirements:
     _entity_create_access: 'recrutement'
 
-entity.hello:
-  path: '/hello'
+recrutement.recrutement_email:
+  path: 'inscription/{param}'
   defaults:
-    _title: 'Hello'
-    _controller: '\Drupal\recrutement\Controller\HelloController:content'
+    _title: 'Le résultat email'
+    _controller: '\Drupal\recrutement\Controller\RecrutementController::content'
+    param: ''
   requirements:
     _access: 'TRUE'
+
+entity.recrutement.send_email:
+  path: '/inscription/send'
+  defaults:
+    _entity_form: recrutement.add
+    _title: 'Le résultat email'
+  requirements:
+    _entity_create_access: 'recrutement'
+
+entity.recrutement.confirm_form:
+  path: '/admin/structure/recrutement/{recrutement}/confirm"'
+  defaults:
+    _entity_form: recrutement.confirm
+    _title: "Confirmation d'inscription"
+  requirements:
+    _entity_create_access: 'recrutement'
+
+entity.recrutement.archive_form:
+  path: '/admin/structure/recrutement/{recrutement}/archive'
+  defaults:
+    _entity_form: recrutement.archive
+    _title: 'Demande de recrutement'
+  requirements:
+    _entity_create_access: 'recrutement'
