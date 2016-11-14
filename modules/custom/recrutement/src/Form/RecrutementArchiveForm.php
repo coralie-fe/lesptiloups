@@ -59,8 +59,9 @@ class RecrutementArchiveForm extends ContentEntityConfirmFormBase {
      * Delete the entity and log the event. log() replaces the watchdog.
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
+        $this->entity->changeRecrutementStatus(2);
         $entity = $this->getEntity();
-        //$entity->delete();
+        $entity->save();
 
         /* \Drupal::logger('content_entity_example')->notice('@type: deleted %title.',
              array(

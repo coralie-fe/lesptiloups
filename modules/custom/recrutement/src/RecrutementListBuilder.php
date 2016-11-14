@@ -20,18 +20,18 @@ class RecrutementListBuilder extends EntityListBuilder {
      * {@inheritdoc}
      */
     public function getDefaultOperations(EntityInterface $entity) {
+        $operations = array();
         $operations = parent::getDefaultOperations($entity);
-
-        if ($entity->hasLinkTemplate('confirm-form')) {
+        if ($entity->access('manage recrutement status') && $entity->hasLinkTemplate('confirm-form') && $entity->getStatut()!=1) {
             $operations['confirm'] = array(
-                'title' => t('Confirm'),
+                'title' => t('Confirmer'),
                 'weight' => -20,
                 'url' => $entity->toUrl('confirm-form'),
             );
         }
-        if ($entity->hasLinkTemplate('archive-form')) {
+        if ($entity->access('manage recrutement status') && $entity->hasLinkTemplate('archive-form')) {
             $operations['archive'] = array(
-                'title' => t('Archive'),
+                'title' => t('Archiver'),
                 'weight' => 21,
                 'url' => $entity->toUrl('archive-form'),
             );

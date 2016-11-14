@@ -41,3 +41,58 @@ function recrutement_validate_path($element, \Drupal\Core\Form\FormState $form_s
         }
     }
 }
+
+function recrutement_entity_type_alter(array &$entity_types) {
+    $a = 1;
+}
+function recrutement_entity_type_build(array &$entity_types) {
+    $a = 1;
+}
+
+
+function recrutement_entity_prepare_form(\Drupal\Core\Entity\EntityInterface $entity, $operation, \Drupal\Core\Form\FormStateInterface $form_state)
+{
+
+    if ($operation == 'edit' && $entity->getEntityTypeId() == 'node' && $entity->bundle() == 'evenement') {
+
+        /* kint($form_state);
+        kint($operation);
+        kint($this);*/
+        $date = time();
+
+        $dateeventField = $entity->get('field_date_de_l_evenement');
+        $dateevent = $dateeventField->getValue();
+        $dateevent = $dateevent[0]['value'];
+//$dateevent = $entity->get('field_date_de_l_evenement')->getValue()[0]['value'];
+        /* kint(strtotime('2016-11-21T14:00:00'));
+        kint(strtotime('2016-11-21T14:09:35'));
+        kint($dateeventField);
+        kint($dateevent);*/
+        $rec = $form_state->getBuildInfo();
+        $rec['callback_object']= $rec['callback_object']->setOperation('node.evenement.evenement_passe');
+        $form_state->setBuildInfo($rec);
+        kint($form_state->getBuildInfo());
+        if ($date < $dateevent) {
+            $rec = $form_state->getBuildInfo();
+            $rec['callback_object']= $this->setOperation('node.evenement.evenement_passe');
+            $form_state->setBuildInfo($rec);
+            kint($form_state->getBuildInfo());
+        }
+    }
+}
+
+function recrutement_entity_form_display_alter(\Drupal\Core\Entity\Display\EntityFormDisplayInterface &$form_display, array $context){
+// kint($form_display);
+// kint($context);
+// $form_display->setOriginalId('node.evenement_passe');
+// $form_display->set('id','node.evenement_passe');
+//if($context['callback_object']->getOperation() == 'evenement_passe') {
+// $context['form_mode'] = 'node.evenement_passe';
+// kint($form_display);
+// kint($context);
+    $storage = \Drupal::entityManager()->getStorage('entity_form_display');
+    $a = $storage->load('node.evenement.evenement_passe');
+//$form_display = $a;
+// kint($a);
+//}
+}

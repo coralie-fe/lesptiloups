@@ -11,6 +11,9 @@ dependencies:
     - datetime
     - options
     - recrutement
+    - user
+_core:
+  default_config_hash: LY2o4iAuQMhjkIc2FZjjGR8AFYRSoSH6FUEmJFL0KUY
 id: recrutement
 label: Recrutement
 module: views
@@ -27,8 +30,9 @@ display:
     position: 0
     display_options:
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'administer recrutement entities'
       cache:
         type: tag
         options: {  }
@@ -495,7 +499,7 @@ display:
           relationship: none
           group_type: group
           admin_label: ''
-          label: 'Operations links'
+          label: Confirmer/archiver
           exclude: false
           alter:
             alter_text: false
@@ -539,6 +543,57 @@ display:
           destination: true
           entity_type: recrutement
           plugin_id: entity_operations
+        edit_recrutement:
+          id: edit_recrutement
+          table: recrutement
+          field: edit_recrutement
+          relationship: none
+          group_type: group
+          admin_label: ''
+          label: Editer
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          text: edit
+          entity_type: recrutement
+          plugin_id: entity_link_edit
       filters:
         combine:
           id: combine
@@ -553,7 +608,7 @@ display:
           exposed: true
           expose:
             operator_id: combine_op
-            label: 'Combine fields filter'
+            label: 'Rechercher sur le nom ou email'
             description: ''
             use_operator: false
             operator: combine_op
@@ -594,7 +649,7 @@ display:
           exposed: true
           expose:
             operator_id: field_statut_value_op
-            label: 'Statut (field_statut)'
+            label: 'Statut de l''inscription'
             description: ''
             use_operator: false
             operator: field_statut_value_op
@@ -631,6 +686,7 @@ display:
       relationships: {  }
       arguments: {  }
       display_extenders: {  }
+      title: 'Gestion des inscriptions'
     cache_metadata:
       max-age: 0
       contexts:
@@ -638,6 +694,29 @@ display:
         - 'languages:language_interface'
         - url
         - url.query_args
+        - user.permissions
+      tags:
+        - 'config:field.storage.recrutement.field_date_d_arrivee'
+        - 'config:field.storage.recrutement.field_email'
+        - 'config:field.storage.recrutement.field_nom'
+        - 'config:field.storage.recrutement.field_prenom'
+        - 'config:field.storage.recrutement.field_statut'
+  page_1:
+    display_plugin: page
+    id: page_1
+    display_title: Page
+    position: 1
+    display_options:
+      display_extenders: {  }
+      path: admin/inscriptions
+    cache_metadata:
+      max-age: 0
+      contexts:
+        - 'languages:language_content'
+        - 'languages:language_interface'
+        - url
+        - url.query_args
+        - user.permissions
       tags:
         - 'config:field.storage.recrutement.field_date_d_arrivee'
         - 'config:field.storage.recrutement.field_email'

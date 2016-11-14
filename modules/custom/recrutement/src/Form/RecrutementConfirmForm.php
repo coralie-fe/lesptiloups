@@ -24,6 +24,10 @@ class RecrutementConfirmForm extends ContentEntityConfirmFormBase {
         return $this->t('Are you sure you want to confirm entity %name?', array('%name' => $this->entity->label()));
     }
 
+    public function getDescription() {
+        return $this->t('');
+    }
+
     /**
      * {@inheritdoc}
      *
@@ -49,7 +53,7 @@ class RecrutementConfirmForm extends ContentEntityConfirmFormBase {
         $form['recrutement_render'] = array(
             '#markup' => \Drupal::service('renderer')->render($render_array_entity)
         );
-        $this->entity->changeRecrutementStatus();
+        $this->entity->getStatut();
         return parent::buildForm($form, $form_state);
     }
 
@@ -59,8 +63,9 @@ class RecrutementConfirmForm extends ContentEntityConfirmFormBase {
      * Delete the entity and log the event. log() replaces the watchdog.
      */
     public function submitForm(array &$form, FormStateInterface $form_state) {
+        $this->entity->changeRecrutementStatus(1);
         $entity = $this->getEntity();
-        //$entity->delete();
+        $entity->save();
 
        /* \Drupal::logger('content_entity_example')->notice('@type: deleted %title.',
             array(

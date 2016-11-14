@@ -17,3 +17,8 @@ view published recrutement entities:
 
 view unpublished recrutement entities:
   title: 'View unpublished Recrutement entities'
+
+manage recrutement status:
+  title: 'Manage Recrutement Statut'
+  description: "Permet de Confirmer ou d'Archiver les demandes d'inscription."
+

@@ -245,8 +245,8 @@ class Recrutement extends ContentEntityBase implements RecrutementInterface {
     public function createUser($name,$email) {
         $user_id= "";
         $user = \Drupal\user\Entity\User::create();
-kint($name);
-        kint($email); die();
+//kint($name);
+       // kint($email); die();
 //Mandatory settings
         $user->setPassword('passworrrd'); // note : faire la generation pass aleatoire
         $user->enforceIsNew();
@@ -309,16 +309,35 @@ kint($name);
         \Drupal::logger('mail-log')->notice($message);
     }
 
-    public function changeRecrutementStatus() {
-        $a  = $this->get('status');
-        $b = $a->getValue();
-         $a->setValue(2);
-        $c = $a->getValue();
-        $this->set('status', 2);
-        $a  = $this->get('status');
-        $b = $a->getValue();
-        $this->get('status')->setValue(2);
-        $this->save();
+    public function changeRecrutementStatus($value = null,$forceSave = FALSE) {
+        $fieldName = 'field_statut';
+
+        //check updateOriginalValues from ContentEntityBase.php
+        $allowed_values = $this->getFieldDefinitions()[$fieldName]->getSetting('allowed_values');
+        if(array_key_exists($value,$allowed_values) && !empty($this->fields[$fieldName])){
+            foreach ($this->fields[$fieldName] as $langcode => $item) {
+                $item->filterEmptyItems();
+                $item->setValue($value);
+                $this->values[$fieldName][$langcode] = $item->getValue();
+            }
+            if($forceSave == TRUE) {
+                $this->save();
+            }
+
+        }
+    }
+
+    public function getStatut() {
+        $statut = null;
+        $fieldName = 'field_statut';
+
+        foreach ($this->fields[$fieldName] as $langcode => $item) {
+            $tmp = $item->getValue();
+            $statut= $tmp[0]['value'];
+        }
+
+        return $statut;
+
     }
 
 }
