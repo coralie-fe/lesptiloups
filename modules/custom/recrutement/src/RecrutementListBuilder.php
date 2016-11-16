@@ -22,17 +22,18 @@ class RecrutementListBuilder extends EntityListBuilder {
     public function getDefaultOperations(EntityInterface $entity) {
         $operations = array();
         $operations = parent::getDefaultOperations($entity);
-        if ($entity->access('manage recrutement status') && $entity->hasLinkTemplate('confirm-form') && $entity->getStatut()!=1) {
+
+        if (\Drupal::currentUser()->hasPermission('manage recrutement status') && $entity->hasLinkTemplate('confirm-form') && $entity->getStatut()!=1) {
             $operations['confirm'] = array(
                 'title' => t('Confirmer'),
                 'weight' => -20,
                 'url' => $entity->toUrl('confirm-form'),
             );
         }
-        if ($entity->access('manage recrutement status') && $entity->hasLinkTemplate('archive-form')) {
+        if (\Drupal::currentUser()->hasPermission('manage recrutement status') && $entity->hasLinkTemplate('archive-form') && $entity->getStatut()!=2) {
             $operations['archive'] = array(
                 'title' => t('Archiver'),
-                'weight' => 21,
+                'weight' => -19,
                 'url' => $entity->toUrl('archive-form'),
             );
         }
