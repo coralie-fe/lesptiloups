@@ -7,7 +7,38 @@ entity.recrutement.collection:
   weight: 100
 
 recrutement.admin.structure.settings:
-  title: Recrutement settings
+  title: 'Recrutement'
   description: 'Configure Recrutement entities'
   route_name: recrutement.settings
-  parent: system.admin_structure
+  #parent: entity.node_type.collection
+  parent: entity.recrutement.collection
+
+recrutement.admin.structure.settings.fields:
+  title: 'Manage Fields'
+  description: 'Manage Recrutement Fields'
+  route_name: entity.recrutement.field_ui_fields
+  parent: recrutement.admin.structure.settings
+
+recrutement.admin.structure.settings.formdisplay:
+  title: 'Manage form display'
+  description: 'Manage Recrutement form display'
+  route_name: entity.entity_form_display.recrutement.default
+  parent: recrutement.admin.structure.settings
+
+recrutement.admin.structure.settings.display:
+  title: 'Manage display'
+  description: 'Manage Recrutement display'
+  route_name: entity.entity_view_display.recrutement.default
+  parent: recrutement.admin.structure.settings
+
+recrutement.admin.content.add:
+  title: 'Inscription'
+  description: 'Add Recrutement'
+  route_name: entity.recrutement.add_form
+  parent: node.add_page
+
+recrutement.admin.content.add:
+  title: 'Inscription'
+  description: 'List inscription'
+  route_name: view.recrutement.page_1
+  parent: system.admin_content

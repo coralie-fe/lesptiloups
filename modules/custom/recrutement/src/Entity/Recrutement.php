@@ -242,26 +242,36 @@ class Recrutement extends ContentEntityBase implements RecrutementInterface {
     /**
      * create user with status  blocked (0)
      */
-    public function createUser($name,$email) {
-        $user_id= "";
+    public function createUser($name,$prenom,$email) {
+        $uid= "";
+        $name_user= "";
         $user = \Drupal\user\Entity\User::create();
-//kint($name);
-       // kint($email); die();
-//Mandatory settings
-        $user->setPassword('passworrrd'); // note : faire la generation pass aleatoire
+
+        $user->setPassword('pass'); // note : le pass est generé ds la fonction envoi mail
         $user->enforceIsNew();
-        $user->setEmail("iii@free.fr");
-        // note : voir plain texte pour name sur  validate du form
-        $user->setUsername("iii");//This username must be unique and accept only a-Z,0-9, - _ @ .
-        //$user->set('status',0);
 
-        //$user->addRole('parent');
+        $user_exist = user_load_by_name($name);
+        if($user_exist){
+            //print "exist"; die();
+            $chiffres = rand(1,99);
+            $name_user= htmlspecialchars($name).' '.htmlspecialchars($prenom).' - '.$chiffres;
+            //print ($name_user); die();
+            //$user->setUsername($name_user);//This username must be unique and accept only a-Z,0-9, - _ @ .
+        }else{
+            //print "no exist"; die();
+            $name_user= htmlspecialchars($name).' '.htmlspecialchars($prenom);
+            //print ($name_user); die();
+            //$user->setUsername($name_user);//This username must be unique and accept only a-Z,0-9, - _ @ .
+        }
 
-        //$user->set('status')->value = 0;
-        //$user->activate();
+        $user->setEmail($email);
+        $user->setUsername($name_user);
 
+        //status bloqué
+        $user->set('status',0);
+        $user->addRole('parent');
 
-//Optional settings
+        //Optional settings
         /*$user->set("init", 'email');
         $user->set("langcode", $language);
         $user->set("preferred_langcode", $language);
@@ -269,11 +279,11 @@ class Recrutement extends ContentEntityBase implements RecrutementInterface {
         //$user->set("setting_name", 'setting_value');
         $user->activate();*/
 
-//Save user
-        //$res = $user->save();
-        return $user_id;
+        $res = $user->save();
+        $uid = $user->id();
 
-
+        //note : envoyé le mail avec login et pass
+        return $uid;
 
     }
 
@@ -308,7 +318,6 @@ class Recrutement extends ContentEntityBase implements RecrutementInterface {
         drupal_set_message($message, 'status');
         \Drupal::logger('mail-log')->notice($message);
     }
-
     public function changeRecrutementStatus($value = null,$forceSave = FALSE) {
         $fieldName = 'field_statut';
 
@@ -339,5 +348,4 @@ class Recrutement extends ContentEntityBase implements RecrutementInterface {
         return $statut;
 
     }
-
 }

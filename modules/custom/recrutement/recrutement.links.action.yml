@@ -3,3 +3,8 @@ entity.recrutement.add_form:
   title: 'Add Recrutement'
   appears_on:
     - entity.recrutement.collection
+entity.recrutement.content.add_form:
+  route_name: entity.recrutement.add_form
+  title: 'Add Inscription'
+  appears_on:
+    - view.recrutement.page_1

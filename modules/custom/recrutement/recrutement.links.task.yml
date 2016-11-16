@@ -19,3 +19,8 @@ entity.recrutement.delete_form:
   title: Delete
   weight: 10
 
+entity.recrutement.content:
+  route_name: view.recrutement.page_1
+  base_route: system.admin_content
+  title: 'Inscriptions'
+

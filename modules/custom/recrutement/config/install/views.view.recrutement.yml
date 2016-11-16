@@ -1,3 +1,4 @@
+langcode: en
 status: true
 dependencies:
   config:
@@ -13,7 +14,7 @@ dependencies:
     - user
 _core:
   default_config_hash: LY2o4iAuQMhjkIc2FZjjGR8AFYRSoSH6FUEmJFL0KUY
-id: 962870fe-4af8-4cba-80d5-ea356d82990d
+id: recrutement
 label: Recrutement
 module: views
 description: 'Liste des inscriptions'

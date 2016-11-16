@@ -20,9 +20,8 @@ class RecrutementListBuilder extends EntityListBuilder {
      * {@inheritdoc}
      */
     public function getDefaultOperations(EntityInterface $entity) {
-        $operations = array();
         $operations = parent::getDefaultOperations($entity);
-
+        $entity->getFields();
         if (\Drupal::currentUser()->hasPermission('manage recrutement status') && $entity->hasLinkTemplate('confirm-form') && $entity->getStatut()!=1) {
             $operations['confirm'] = array(
                 'title' => t('Confirmer'),
