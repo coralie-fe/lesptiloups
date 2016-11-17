@@ -33,6 +33,10 @@ class RecrutementArchiveForm extends ContentEntityConfirmFormBase {
         return new Url('entity.recrutement.collection');
     }
 
+    public function getDescription() {
+        return $this->t('');
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -45,7 +49,7 @@ class RecrutementArchiveForm extends ContentEntityConfirmFormBase {
      * {@inheritdoc}
      */
     public function buildForm(array $form, FormStateInterface $form_state) {
-        $render_array_entity = $this->entityManager->getViewBuilder('recrutement')->view($this->entity,'preview');
+        $render_array_entity = $this->entityManager->getViewBuilder('recrutement')->view($this->entity,'archiver');
         $form['recrutement_render'] = array(
             '#markup' => \Drupal::service('renderer')->render($render_array_entity)
         );

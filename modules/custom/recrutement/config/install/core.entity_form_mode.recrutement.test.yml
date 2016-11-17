@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - recrutement
+id: recrutement.test
+label: test
+targetEntityType: recrutement
+cache: true

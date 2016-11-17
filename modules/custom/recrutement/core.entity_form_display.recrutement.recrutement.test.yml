@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_form_mode.recrutement.test
     - field.field.recrutement.recrutement.field_affecter_a_une_section
     - field.field.recrutement.recrutement.field_date_d_arrivee
     - field.field.recrutement.recrutement.field_date_d_entree
@@ -20,81 +21,86 @@ dependencies:
     - image
     - recrutement
     - telephone
-id: recrutement.recrutement.default
+id: recrutement.recrutement.test
 targetEntityType: recrutement
 bundle: recrutement
-mode: default
+mode: test
 content:
-  field_affecter_a_une_section:
-    weight: 10
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
   field_date_d_arrivee:
-    weight: 4
+    weight: 6
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_date_d_entree:
-    weight: 8
+    weight: 10
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_date_de_naissance:
-    weight: 3
+    weight: 5
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_date_de_sortie:
-    weight: 9
+    weight: 11
     settings: {  }
     third_party_settings: {  }
     type: datetime_default
   field_email:
-    weight: 6
+    weight: 8
     settings:
       size: 60
       placeholder: ''
     third_party_settings: {  }
     type: email_default
   field_nom:
-    weight: 1
+    weight: 3
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
-  field_parent:
-    type: options_select
-    weight: 0
-    settings: {  }
-    third_party_settings: {  }
   field_photo:
-    weight: 7
+    weight: 9
     settings:
       progress_indicator: throbber
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
   field_prenom:
-    weight: 2
+    weight: 4
     settings:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
     type: string_textarea
-  field_statut:
-    weight: 11
-    settings: {  }
-    third_party_settings: {  }
-    type: options_select
   field_telephone:
-    weight: 5
+    weight: 7
     settings:
       placeholder: ''
     third_party_settings: {  }
     type: telephone_default
+  langcode:
+    type: language_select
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+  name:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+  user_id:
+    type: entity_reference_autocomplete
+    weight: 1
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
 hidden:
-  langcode: true
-  name: true
-  user_id: true
+  field_affecter_a_une_section: true
+  field_parent: true
+  field_statut: true

@@ -2,10 +2,10 @@ langcode: en
 status: true
 dependencies:
   module:
-    - recrutement
-id: recrutement.field_nom
-field_name: field_nom
-entity_type: recrutement
+    - user
+id: user.field_prenom
+field_name: field_prenom
+entity_type: user
 type: string
 settings:
   max_length: 255

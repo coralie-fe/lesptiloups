@@ -1,0 +1,7 @@
+langcode: en
+status: true
+dependencies: {  }
+id: equipe_pedagogique
+label: 'Equipe pedagogique'
+weight: 4
+is_admin: null

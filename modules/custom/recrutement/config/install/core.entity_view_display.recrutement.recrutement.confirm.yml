@@ -1,0 +1,77 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.recrutement.confirm
+    - field.field.recrutement.recrutement.field_affecter_a_une_section
+    - field.field.recrutement.recrutement.field_date_d_arrivee
+    - field.field.recrutement.recrutement.field_date_d_entree
+    - field.field.recrutement.recrutement.field_date_de_naissance
+    - field.field.recrutement.recrutement.field_date_de_sortie
+    - field.field.recrutement.recrutement.field_email
+    - field.field.recrutement.recrutement.field_nom
+    - field.field.recrutement.recrutement.field_parent
+    - field.field.recrutement.recrutement.field_photo
+    - field.field.recrutement.recrutement.field_prenom
+    - field.field.recrutement.recrutement.field_statut
+    - field.field.recrutement.recrutement.field_telephone
+  module:
+    - datetime
+    - image
+    - recrutement
+id: recrutement.recrutement.confirm
+targetEntityType: recrutement
+bundle: recrutement
+mode: confirm
+content:
+  field_date_d_arrivee:
+    weight: 5
+    label: above
+    settings:
+      format_type: medium
+      timezone_override: ''
+    third_party_settings: {  }
+    type: datetime_default
+  field_email:
+    weight: 2
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_nom:
+    weight: 0
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+  field_parent:
+    weight: 3
+    label: above
+    settings:
+      view_mode: complet
+      link: false
+    third_party_settings: {  }
+    type: entity_reference_entity_view
+  field_photo:
+    weight: 4
+    label: above
+    settings:
+      image_style: ''
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  field_prenom:
+    weight: 1
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+hidden:
+  field_affecter_a_une_section: true
+  field_date_d_entree: true
+  field_date_de_naissance: true
+  field_date_de_sortie: true
+  field_statut: true
+  field_telephone: true
+  name: true
+  user_id: true

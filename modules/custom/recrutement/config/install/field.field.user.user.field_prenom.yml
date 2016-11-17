@@ -2,16 +2,16 @@ langcode: en
 status: true
 dependencies:
   config:
-    - field.storage.recrutement.field_prenom
+    - field.storage.user.field_prenom
   module:
-    - recrutement
-id: recrutement.recrutement.field_prenom
+    - user
+id: user.user.field_prenom
 field_name: field_prenom
-entity_type: recrutement
-bundle: recrutement
-label: Prénom
+entity_type: user
+bundle: user
+label: Prenom
 description: ''
-required: true
+required: false
 translatable: false
 default_value: {  }
 default_value_callback: ''

@@ -23,6 +23,7 @@ class RecrutementForm extends ContentEntityForm {
       // objet form devient un array et ne contient plus les form mode, ils sont copiés ds $form_state
       // ils sont ds la clé 'callback_object'
 
+      kint(\Drupal::service('path.validator')->getUrlIfValid(\Drupal::service('path.current')->getPath())->getRouteName());
       $rec = $form_state->getBuildInfo();
       $ope= $rec['callback_object'] -> getOperation();
 
@@ -101,6 +102,7 @@ class RecrutementForm extends ContentEntityForm {
                 $field_prenom =  $form_state->getValue('prenomparent_value');
                 $field_email =  $form_state->getValue(['field_email', '0', 'value']);
                 $id_parent = $this->entity->createUser($field_nom,$field_prenom,$field_email);
+
             }
             else{
                 $id_parent = $this->currentUser()->id();
@@ -149,7 +151,12 @@ class RecrutementForm extends ContentEntityForm {
         /*drupal_set_message($this->t('Created the %label Recrutement.', [
           '%label' => $entity->label(),
         ]));*/
-          drupal_set_message($this->t('Thank you for your inscription @name', array('@name' => $form_state->getValue('field_nom'))));
+          if($this->currentUser()->isAnonymous() || !$this->currentUser()->getRoles(TRUE)){
+              drupal_set_message($this->t('Merci pour votre inscription @name. Nos équipes vont traiter votre demande dans les
+              plus bref délais.
+              
+              Vous recevrez vos identifiants par e-mail lorsque votre demande sera acceptée.', array('@name' => $form_state->getValue('field_nom')[0]['value'])));
+          }
         break;
 
       default:
@@ -158,8 +165,15 @@ class RecrutementForm extends ContentEntityForm {
         ]));
     }
 
-
-    $form_state->setRedirect('entity.recrutement.canonical', ['recrutement' => $entity->id()]);
+      if($this->currentUser()->getRoles(TRUE)) {
+          $form_state->setRedirect('entity.recrutement.canonical', ['recrutement' => $entity->id()]);
+      }
+      else {
+          //programmatically get the route name of the front page '/'
+          $url_object = \Drupal::service('path.validator')->getUrlIfValid('/');
+          $route = $url_object->getRouteName();
+          $form_state->setRedirect($route);
+      }
   }
 
     //fonction de test validant le formulaire

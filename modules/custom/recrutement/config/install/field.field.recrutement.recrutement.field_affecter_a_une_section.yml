@@ -10,7 +10,7 @@ id: recrutement.recrutement.field_affecter_a_une_section
 field_name: field_affecter_a_une_section
 entity_type: recrutement
 bundle: recrutement
-label: 'Affecter à une section'
+label: Section
 description: ''
 required: false
 translatable: false

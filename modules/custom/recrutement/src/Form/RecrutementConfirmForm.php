@@ -49,11 +49,22 @@ class RecrutementConfirmForm extends ContentEntityConfirmFormBase {
      * {@inheritdoc}
      */
     public function buildForm(array $form, FormStateInterface $form_state) {
-        $render_array_entity = $this->entityManager->getViewBuilder('recrutement')->view($this->entity,'preview');
+        //on choise le display view confirmer
+        $render_array_entity = $this->entityManager->getViewBuilder('recrutement')->view($this->entity,'confirm');
         $form['recrutement_render'] = array(
             '#markup' => \Drupal::service('renderer')->render($render_array_entity)
         );
         $this->entity->getStatut();
+        $form['nomparent_value']= array(
+            '#type'=>           'textfield',
+            '#title'=>          t('Nom du parent : '),
+            '#Description'=>    t('Nom du parent'),
+            '#size'=>           '40',
+            '#maxlengh'=>       '128',
+            '#required'=>       'TRUE',
+            '#suffix'=> '<span class="text-message"></span>',
+
+        );
         return parent::buildForm($form, $form_state);
     }
 
