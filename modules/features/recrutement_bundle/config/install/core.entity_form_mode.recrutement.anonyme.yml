@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - recrutement
+id: recrutement.anonyme
+label: anonyme
+targetEntityType: recrutement
+cache: true

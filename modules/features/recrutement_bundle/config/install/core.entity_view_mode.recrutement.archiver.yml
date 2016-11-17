@@ -1,0 +1,9 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - recrutement
+id: recrutement.archiver
+label: Archiver
+targetEntityType: recrutement
+cache: true

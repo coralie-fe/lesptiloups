@@ -1,0 +1,33 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.user.complet
+    - field.field.user.user.field_nom
+    - field.field.user.user.field_prenom
+    - field.field.user.user.user_picture
+  module:
+    - user
+id: user.user.complet
+targetEntityType: user
+bundle: user
+mode: complet
+content:
+  field_nom:
+    weight: 1
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+  field_prenom:
+    weight: 0
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+hidden:
+  langcode: true
+  member_for: true
+  user_picture: true

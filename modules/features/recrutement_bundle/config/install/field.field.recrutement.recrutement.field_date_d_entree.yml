@@ -1,0 +1,20 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.recrutement.field_date_d_entree
+  module:
+    - datetime
+    - recrutement
+id: recrutement.recrutement.field_date_d_entree
+field_name: field_date_d_entree
+entity_type: recrutement
+bundle: recrutement
+label: 'Date d''entrée'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: datetime

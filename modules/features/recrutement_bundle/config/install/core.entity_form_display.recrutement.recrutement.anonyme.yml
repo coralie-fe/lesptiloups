@@ -1,0 +1,73 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.recrutement.anonyme
+    - field.field.recrutement.recrutement.field_affecter_a_une_section
+    - field.field.recrutement.recrutement.field_date_d_arrivee
+    - field.field.recrutement.recrutement.field_date_d_entree
+    - field.field.recrutement.recrutement.field_date_de_naissance
+    - field.field.recrutement.recrutement.field_date_de_sortie
+    - field.field.recrutement.recrutement.field_email
+    - field.field.recrutement.recrutement.field_nom
+    - field.field.recrutement.recrutement.field_parent
+    - field.field.recrutement.recrutement.field_photo
+    - field.field.recrutement.recrutement.field_prenom
+    - field.field.recrutement.recrutement.field_statut
+    - field.field.recrutement.recrutement.field_telephone
+  module:
+    - datetime
+    - recrutement
+    - telephone
+id: recrutement.recrutement.anonyme
+targetEntityType: recrutement
+bundle: recrutement
+mode: anonyme
+content:
+  field_date_d_arrivee:
+    weight: 15
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+  field_date_de_naissance:
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+  field_email:
+    weight: 17
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+  field_nom:
+    weight: 11
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_prenom:
+    weight: 12
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_telephone:
+    weight: 16
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+hidden:
+  field_affecter_a_une_section: true
+  field_date_d_entree: true
+  field_date_de_sortie: true
+  field_parent: true
+  field_photo: true
+  field_statut: true
+  langcode: true
+  name: true
+  user_id: true

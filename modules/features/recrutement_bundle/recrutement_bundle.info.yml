@@ -1,0 +1,5 @@
+name: 'Recrutement Bundle'
+description: "Recrutement bundle Features"
+type: module
+package: Lesptiloups
+core: 8.x

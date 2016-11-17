@@ -1,0 +1,103 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_form_mode.recrutement.bureau
+    - field.field.recrutement.recrutement.field_affecter_a_une_section
+    - field.field.recrutement.recrutement.field_date_d_arrivee
+    - field.field.recrutement.recrutement.field_date_d_entree
+    - field.field.recrutement.recrutement.field_date_de_naissance
+    - field.field.recrutement.recrutement.field_date_de_sortie
+    - field.field.recrutement.recrutement.field_email
+    - field.field.recrutement.recrutement.field_nom
+    - field.field.recrutement.recrutement.field_parent
+    - field.field.recrutement.recrutement.field_photo
+    - field.field.recrutement.recrutement.field_prenom
+    - field.field.recrutement.recrutement.field_statut
+    - field.field.recrutement.recrutement.field_telephone
+    - image.style.thumbnail
+  module:
+    - datetime
+    - image
+    - recrutement
+    - telephone
+id: recrutement.recrutement.bureau
+targetEntityType: recrutement
+bundle: recrutement
+mode: bureau
+content:
+  field_affecter_a_une_section:
+    weight: 22
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_date_d_arrivee:
+    weight: 15
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+  field_date_d_entree:
+    weight: 20
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+  field_date_de_naissance:
+    weight: 13
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+  field_date_de_sortie:
+    weight: 21
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+  field_email:
+    weight: 17
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: email_default
+  field_nom:
+    weight: 11
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_photo:
+    weight: 19
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+  field_prenom:
+    weight: 12
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textarea
+  field_statut:
+    weight: 23
+    settings: {  }
+    third_party_settings: {  }
+    type: options_select
+  field_telephone:
+    weight: 16
+    settings:
+      placeholder: ''
+    third_party_settings: {  }
+    type: telephone_default
+  name:
+    type: string_textfield
+    weight: -4
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  field_parent: true
+  langcode: true
+  user_id: true
