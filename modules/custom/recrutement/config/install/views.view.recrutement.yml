@@ -12,8 +12,6 @@ dependencies:
     - options
     - recrutement
     - user
-_core:
-  default_config_hash: LY2o4iAuQMhjkIc2FZjjGR8AFYRSoSH6FUEmJFL0KUY
 id: recrutement
 label: Recrutement
 module: views

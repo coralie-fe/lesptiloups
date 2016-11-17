@@ -1,5 +1,20 @@
 name: 'Recrutement Bundle'
-description: "Recrutement bundle Features"
+description: 'Recrutement bundle Features'
 type: module
 package: Lesptiloups
 core: 8.x
+dependencies:
+  - datetime
+  - field
+  - image
+  - language
+  - menu_ui
+  - node
+  - options
+  - path
+  - recrutement
+  - taxonomy
+  - telephone
+  - text
+  - user
+  - views

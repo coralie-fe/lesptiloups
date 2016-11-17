@@ -4,6 +4,9 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.evenement.body
+    - field.field.node.evenement.field_compte_rendu_evenement
+    - field.field.node.evenement.field_date_de_l_evenement
+    - field.field.node.evenement.field_photos_de_l_evenement
     - node.type.evenement
   module:
     - text
@@ -23,4 +26,7 @@ content:
   links:
     weight: 100
 hidden:
+  field_compte_rendu_evenement: true
+  field_date_de_l_evenement: true
+  field_photos_de_l_evenement: true
   langcode: true

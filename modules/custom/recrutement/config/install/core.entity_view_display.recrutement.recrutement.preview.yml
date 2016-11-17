@@ -2,6 +2,7 @@ langcode: en
 status: true
 dependencies:
   config:
+    - core.entity_view_mode.recrutement.preview
     - field.field.recrutement.recrutement.field_affecter_a_une_section
     - field.field.recrutement.recrutement.field_date_d_arrivee
     - field.field.recrutement.recrutement.field_date_d_entree
@@ -19,22 +20,20 @@ dependencies:
     - image
     - options
     - recrutement
-    - telephone
-    - user
-id: recrutement.recrutement.default
+id: recrutement.recrutement.preview
 targetEntityType: recrutement
 bundle: recrutement
-mode: default
+mode: preview
 content:
   field_affecter_a_une_section:
-    weight: 12
+    weight: 7
     label: above
     settings:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
   field_date_d_arrivee:
-    weight: 5
+    weight: 2
     label: above
     settings:
       format_type: medium
@@ -42,23 +41,7 @@ content:
     third_party_settings: {  }
     type: datetime_default
   field_date_d_entree:
-    weight: 10
-    label: above
-    settings:
-      format_type: medium
-      timezone_override: ''
-    third_party_settings: {  }
-    type: datetime_default
-  field_date_de_naissance:
-    weight: 3
-    label: above
-    settings:
-      format_type: medium
-      timezone_override: ''
-    third_party_settings: {  }
-    type: datetime_default
-  field_date_de_sortie:
-    weight: 11
+    weight: 6
     label: above
     settings:
       format_type: medium
@@ -66,27 +49,26 @@ content:
     third_party_settings: {  }
     type: datetime_default
   field_email:
-    weight: 7
+    weight: 3
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
   field_nom:
-    weight: 1
+    weight: 0
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
   field_parent:
-    weight: 8
+    weight: 4
     label: above
     settings:
-      view_mode: complet
-      link: false
+      link: true
     third_party_settings: {  }
-    type: entity_reference_entity_view
+    type: entity_reference_label
   field_photo:
-    weight: 9
+    weight: 5
     label: above
     settings:
       image_style: ''
@@ -94,35 +76,20 @@ content:
     third_party_settings: {  }
     type: image
   field_prenom:
-    weight: 2
+    weight: 1
     label: above
     settings: {  }
     third_party_settings: {  }
     type: basic_string
   field_statut:
-    weight: 13
+    type: list_key
+    weight: 8
     label: above
     settings: {  }
     third_party_settings: {  }
-    type: list_default
-  field_telephone:
-    weight: 6
-    label: above
-    settings:
-      title: ''
-    third_party_settings: {  }
-    type: telephone_link
-  name:
-    label: above
-    type: string
-    weight: -4
-    settings:
-      link_to_entity: false
-    third_party_settings: {  }
-  user_id:
-    label: hidden
-    type: author
-    weight: 0
-    settings: {  }
-    third_party_settings: {  }
-hidden: {  }
+hidden:
+  field_date_de_naissance: true
+  field_date_de_sortie: true
+  field_telephone: true
+  name: true
+  user_id: true

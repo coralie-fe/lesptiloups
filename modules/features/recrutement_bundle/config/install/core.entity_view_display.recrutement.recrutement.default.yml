@@ -19,6 +19,7 @@ dependencies:
     - image
     - options
     - recrutement
+    - telephone
     - user
 id: recrutement.recrutement.default
 targetEntityType: recrutement
@@ -80,9 +81,10 @@ content:
     weight: 8
     label: above
     settings:
-      link: true
+      view_mode: complet
+      link: false
     third_party_settings: {  }
-    type: entity_reference_label
+    type: entity_reference_entity_view
   field_photo:
     weight: 9
     label: above
@@ -106,9 +108,10 @@ content:
   field_telephone:
     weight: 6
     label: above
-    settings: {  }
+    settings:
+      title: ''
     third_party_settings: {  }
-    type: basic_string
+    type: telephone_link
   name:
     label: above
     type: string
